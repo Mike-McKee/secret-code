@@ -1,8 +1,8 @@
 # Reminder, keep letters lowercase so turn uppercase ones into lower case in function
 import numpy as np
 
-# Reminder, keep letters lowercase so turn uppercase ones into lower case in function
-encrypt = {
+# Dictionary for changing letters in secret message into numbers
+num_lib = {
     'a': 26,
     'b': 1,
     'c': 25,
@@ -32,33 +32,62 @@ encrypt = {
     ' ': 27
 }
 
-#here's the first test to change string to int using the dictionary
-test_string =  'its a secret code'
+# Dictionary for encoding numbers back to letters
+encode_lib = {
+    1: 'f',
+    4: 'd',
+    27: 'p',
+    100: 'x',
+    1331: 'w',
+    144: 'z',
+    2197: 'g',
+    400: 'l',
+    9261: 't',
+    484: 'm',
+    12167: 'e',
+    900: 'c',
+    29791: 'b',
+    1024: 'q',
+    35937: 'y',
+    10000: 'u',
+    1030301: 'n',
+    10404: 'i',
+    1092727: 's',
+    12100: 'a',
+    1367631: 'o',
+    12544: 'z',
+    1442897: 'r',
+    14400: 'h',
+    1771561: 'j',
+    14884: 'k',
+    1860867: ' '
+}
 
-string_to_num = []
-
-for i in test_string:
-    string_to_num.append(encrypt[i])
-
-#Change values in string_to_num from base 10 to base 4
-base_four = []
-
-for j in string_to_num:
-   switch_b_four = int(np.base_repr(j, base=4))
-   base_four.append(switch_b_four)
-
-#Here we raise to power of 2 if even and power of 3 if odd
-encryption = []
-
-for m in base_four:
-    if m % 2 == 1:
-        new_pow = m ** 3
-    else:
-        new_pow = m ** 2
+def change_num(num):
     
-    encryption.append(new_pow)
+    # changes numbers from base 10 to base 4
+    sb_four = int(np.base_repr(num, base=4))
 
-#print results
-print(encryption)
+    # Cubes or Squares base 4 numbers based on if they're odd or even
+    if sb_four % 2 == 1:
+        new_num = sb_four ** 3
+    else:
+        new_num = sb_four ** 2
+    
+    return new_num
 
+# the encryption function to create secret messages
+def encrypt(str):
 
+    encryption = []
+
+    for i in str:
+        encryption.append(encode_lib[change_num(num_lib[i])])
+
+    result = ''.join(k for k in encryption)
+
+    return result        
+
+secret_message = input("Enter secret message here: ")
+
+print(encrypt(secret_message))
