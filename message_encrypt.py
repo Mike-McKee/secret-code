@@ -63,29 +63,20 @@ encode_lib = {
     1860867: ' '
 }
 
-def change_num(num):
-    
-    # changes numbers from base 10 to base 4
-    sb_four = int(np.base_repr(num, base=4))
-
-    # Cubes or Squares base 4 numbers based on if they're odd or even
+def change_num(num):    
+    sb_four = int(np.base_repr(num, base=4))    #changes numbers from base 10 to base 4
     if sb_four % 2 == 1:
-        new_num = sb_four ** 3
+        new_num = sb_four ** 3  #Cubes odd numbers
     else:
-        new_num = sb_four ** 2
-    
+        new_num = sb_four ** 2  #Squares even numbers
     return new_num
 
 # the encryption function to create secret messages
 def encrypt(str):
-
     encryption = []
-
     for i in str:
         encryption.append(encode_lib[change_num(num_lib[i])])
-
     result = ''.join(k for k in encryption)
-
     return result        
 
 secret_message = input("Enter secret message here: ")

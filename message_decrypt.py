@@ -63,24 +63,18 @@ num_dic = {
 #Square roots or cube roots numbers based on if they're even or odd
 #Then it converts the number from base 4 to base 10
 def switch_num(number):
-
     if number % 2 == 1:
         decrypt_num = int(str(int(np.cbrt(number))), 4)
     else:
         decrypt_num = int(str(int(np.sqrt(number))), 4)
-
     return decrypt_num
 
 #Uses above dictionaries and switch_num function to decode strings
 def decrypt(str):
-
     decryption = []
-
     for i in str:
         decryption.append(num_dic[switch_num(decode_lib[i])])
-
     final_message = ''.join(k for k in decryption)
-    
     return final_message
 
 decoded_message = input("Enter what you want decoded: ")
